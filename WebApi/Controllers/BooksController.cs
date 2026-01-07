@@ -17,23 +17,23 @@ public class BooksController : ControllerBase
     };
 
     [HttpGet]
-    public List<Book> GetBooks()
+    public ActionResult<List<Book>> GetBooks()
     {
         var bookList = Books.OrderBy(x => x.Id).ToList();
         return bookList;
     }
 
     [HttpGet("{id}")]
-    public Book GetBookByID(int id)
+    public ActionResult<Book> GetBookByID(int id)
     {
-        var book = Books.Where(book => book.Id == id).FirstOrDefault();
+        var book = Books.FirstOrDefault(book => book.Id == id);
         return book;
     }
 
     [HttpGet("search")]
-    public Book GetFromQuery([FromQuery] int id)
+    public ActionResult<Book> GetFromQuery([FromQuery] int id)
     {
-        var book = Books.Where(book => book.Id == id).FirstOrDefault();
+        var book = Books.FirstOrDefault(book => book.Id == id);
         return book;
     }
 
@@ -45,7 +45,7 @@ public class BooksController : ControllerBase
         else
         {
             Books.Add(newBook);
-            return Ok();
+            return Ok(newBook);
         }
     }
 
@@ -61,7 +61,7 @@ public class BooksController : ControllerBase
             book.GenreId = updatedBook.GenreId;
             book.Page = updatedBook.Page;
             book.PublishDate = updatedBook.PublishDate;
-            return Ok();
+            return Ok(book);
         }
     }
 }

@@ -1,0 +1,36 @@
+@host = http://localhost:5093
+
+GET {{host}}/books
+Accept: application/json
+
+###
+GET {{host}}/books/7
+Accept: application/json
+
+###
+GET {{host}}/books/search?id=4
+Accept: application/json
+
+###
+POST {{host}}/books
+Content-Type: application/json
+
+{
+  "id": 6,
+  "title": "Lord of the Rings",
+  "genreId": 2,
+  "page": 1100,
+  "publishDate": "2001-05-15T09:30:00"
+}
+
+###
+PUT {{host}}/books/6
+Content-Type: application/json
+
+{
+    "id": 6,
+    "title": "Lord of the Rings",
+    "genreId": 2,
+    "page": 1100,
+    "publishDate": "2001-05-15T09:30:00"
+}
